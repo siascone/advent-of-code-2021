@@ -18,10 +18,6 @@ def sliding_window_3(arr)
 end
 
 
-
-
-
-
-depths_arr = File.readlines('puzzle-data', chomp: true).map{ |ele| ele.to_i }
+depths_arr = File.readlines('puzzle-data.txt', chomp: true).map{ |ele| ele.to_i }
 
 p sliding_window_3(depths_arr)
