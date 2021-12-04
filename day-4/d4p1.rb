@@ -1,10 +1,12 @@
-
+require 'byebug'
 
 def play(draws, boards)
     draws.each_with_index do |draw, i|
         boards.each do |board|
             checked_board = check_board(board, draw)
+            debugger
             if win(checked_board)
+                debugger
                 return calc_score(board, draws[0..i])
             end
         end
@@ -12,8 +14,9 @@ def play(draws, boards)
 end
 
 def calc_score(board, draws)
+    debugger
     dup = deep_dup(board)
-    winning_num = draws[-1]
+    winning_num = draws[-2]
     
     dup.each_with_index do |row, i|
         row.each_with_index do |ele, j|
@@ -43,18 +46,25 @@ def calc_score(board, draws)
             end
         end
         p board[col_win_idx]
-        col_score = board.transpose[col_win_idx].map{|ele| ele.to_i }.sum * winning_num
+        # col_score = board.transpose[col_win_idx].map{|ele| ele.to_i }.sum * winning_num
     else
-        row_score = board[row_win_idx].map{ |ele| ele.to_i }.sum * winning_num
+        # row_score = board[row_win_idx].map{ |ele| ele.to_i }.sum * winning_num
     end
 
     if col_score == 0
-        return row_score
+        score = row_score
+    else
+        score = col_score
     end
-    col_score
+
+
+    p score
+    p winning_num
+    p draws
 end
 
 def check_board(board, num)
+    debugger
     dup = deep_dup(board)
     dup.each_with_index do |row, i|
         row.each_with_index do |ele, j|
@@ -68,17 +78,20 @@ def check_board(board, num)
 end
 
 def row_win(board) 
+    debugger
     board.each do |row|
         row.all? { |ele| ele == :x}
     end
 end
 
 def col_win(board)
+    debugger
     trans = board.transpose
     row_win(trans)
 end
 
 def win(board)
+    debugger
     row_win(board) || col_win(board)
 end
 
