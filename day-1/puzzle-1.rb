@@ -17,5 +17,5 @@ def num_increasing_depths(depths)
     return count
 end
     
-depths_arr = File.readlines('puzzle', chomp: true).map{ |ele| ele.to_i }
+depths_arr = File.readlines('puzzle-data', chomp: true).map{ |ele| ele.to_i }
 p num_increasing_depths(depths_arr)
